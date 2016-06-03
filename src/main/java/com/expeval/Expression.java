@@ -22,7 +22,7 @@ public class Expression {
     }
 
     public static Expression parse(String inputExpression) {
-        return parse(inputExpression.trim(), Context.getDefault());
+        return parse(inputExpression, Context.getDefault());
     }
 
     public static Expression parse(String inputExpression, Context context) {

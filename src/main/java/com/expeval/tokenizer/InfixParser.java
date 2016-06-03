@@ -48,13 +48,13 @@ import java.util.List;
                     case UNARY_OPERATOR:
                     case BINARY_OPERATOR:
                     case FUNCTION:
-                        while (!stack.isEmpty() && isInputTokenHasLowerPrecedence(token, stack.peek())) {
+                        while (!stack.isEmpty() && inputTokenHasLowerPrecedence(token, stack.peek())) {
                             result.add(stack.pop());
                         }
                         stack.push(token);
                         break;
                     case COMMA:
-                        while (!stack.isEmpty() && isInputTokenHasLowerPrecedence(Integer.MIN_VALUE, stack.peek())) {
+                        while (!stack.isEmpty() && inputTokenHasLowerPrecedence(Integer.MIN_VALUE, stack.peek())) {
                             result.add(stack.pop());
                         }
                         continue;

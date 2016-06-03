@@ -19,7 +19,7 @@ public abstract class Parser {
     }
 
 
-    boolean isInputTokenHasLowerPrecedence(Token inputToken, Token stackTop) {
+    boolean inputTokenHasLowerPrecedence(Token inputToken, Token stackTop) {
         if (inputToken instanceof Operator) {
             if (stackTop instanceof Operator) {
                 Operator input = (Operator) inputToken;
@@ -38,7 +38,7 @@ public abstract class Parser {
         return false;
     }
 
-    boolean isInputTokenHasLowerPrecedence(int inputPrecedence, Token stackTop) {
+    boolean inputTokenHasLowerPrecedence(int inputPrecedence, Token stackTop) {
         if (stackTop instanceof Operator) {
             if (inputPrecedence == ((Operator) stackTop).getPrecedence() || inputPrecedence < ((Operator) stackTop).getPrecedence()) {
                 return true;

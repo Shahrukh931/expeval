@@ -24,8 +24,8 @@ public class ExpressionTest {
     public void testSimpleNativeOperators() {
         assertEquals(-1d, Expression.parse("  -  1 ").eval());
         assertEquals(-.1d, Expression.parse(" - .1").eval());
-        assertEquals(1d,Expression.parse("-+-+1").eval());
-        assertEquals(2d,Expression.parse("1+-+-+1").eval());
+        assertEquals(1d, Expression.parse("-+-+1").eval());
+        assertEquals(2d, Expression.parse("1+-+-+1").eval());
         assertEquals(1d, Expression.parse("  +1  ").eval());
         assertEquals(0d, Expression.parse(" -1 + 1 ").eval());
         assertEquals(3.1666d, Expression.parse(" 2.0333 + 1.1333 ").eval());
@@ -42,8 +42,8 @@ public class ExpressionTest {
         assertEquals(false, Expression.parse("true && !true").eval());
         assertEquals(10l, Expression.parse("3+5^2").eval());
         assertEquals(7l, Expression.parse("3|5").eval());
-        assertEquals("abc12",Expression.parse("\"abc\"+1+2").eval());
-        assertEquals("3.0abc",Expression.parse("1+2+\"abc\"").eval());
+        assertEquals("abc12", Expression.parse("\"abc\"+1+2").eval());
+        assertEquals("3.0abc", Expression.parse("1+2+\"abc\"").eval());
         assertEquals(true, Expression.parse("\"ab\"==\"ab\"").eval());
         assertEquals(false, Expression.parse("\"ab\"==\"Ab\"").eval());
         assertEquals(false, Expression.parse("1==\"1\"").eval());
@@ -104,6 +104,19 @@ public class ExpressionTest {
             }
         });
 
+        //recursion
+        Context.getDefault().registerFunction(new Function("fact") {
+            @Override
+            public Object onEvaluation(List<Object> arguments) {
+                Long value = (Long) arguments.get(0);
+                if (value == 0) {
+                    return Long.valueOf("1");
+                }
+                arguments.set(0, value - 1);
+                return value * (Long) Context.getDefault().getFunction("fact").onEvaluation(arguments);
+            }
+        });
+
         Context.getDefault().registerFunction(new Function("asList") {
             @Override
             public Object onEvaluation(List<Object> arguments) {
@@ -149,7 +162,7 @@ public class ExpressionTest {
         assertEquals(true, Expression.parse("list contains 1 && asList(1,2,3,true) contains true").eval());
         assertEquals(3d, Expression.parse(" if(decBy2 asList(2,3,4,5,6)   contains   0 , get(\"version\") + 2,true  ) ").eval());
         assertEquals(true, Expression.parse("get(\"screenName\") == \"MainScreen\" && get(\"screenTitle\") == \"Title1\"").eval());
-
+        assertEquals(120l,Expression.parse("fact(5)").eval());
 
     }
 
