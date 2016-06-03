@@ -71,13 +71,13 @@ public class ExpressionTest {
         x.setValue(10);
         Context.getDefault().registerVar(x);
 
-        Var list = new Var("list");
+        Var myList = new Var("list");
         List<Object> l = new ArrayList<Object>();
         l.add(1);
         l.add(true);
         l.add("xyz");
-        list.setValue(l);
-        Context.getDefault().registerVar(list);
+        myList.setValue(l);
+        Context.getDefault().registerVar(myList);
 
         final Map<String, Object> container = new HashMap<String, Object>();
         container.put("screenName", "MainScreen");
