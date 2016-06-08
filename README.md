@@ -5,26 +5,28 @@ A light weight, customizable expression evaluator.
 # Overview
 ---
 
-- [Key features](#)
-- [Quick demo](#)
-- [Predefined operators](#)
-- [Custom operators and functions](#)
-- [Using context](#)
+- [Key features](#key-features)
+- [Quick demo](#quick-demo)
+- [Predefined native operators](#predefined-native-operators)
+- [Custom operators and functions](#custom-operators-and-functions)
+- [Using context](#using-context)
 
 ---
+<a id="key-features"></a>
 ## Key features: 
 
 
-- Variables support.
-- Custom operators(unary or binary) and functions can be added at runtime.
+- Support for **variables**.
+- Ability to add **custom operators** (unary and binary both supported) and **custom functions** at runtime.
 - Support for defining a context or scope in which the expression will be evaluated.
-- Compiled expression can saved to avoid repetative compilation for future evaluations.
+- Compiled expression can be saved to avoid repetitive compilation for future evaluations.
 - Exceptions with detailed messages are thrown during expression compilation.
-- Functions can be defined with any number of arguments.
-- Pre-Defined standard boolean and mathematical operators. 
+- Custom functions can be defined with any number of arguments.
+- Out-of-the-box support for standard boolean and mathematical operators. 
 
-   The expression is compiled against following grammer: 
-   ```html
+   The expression is compiled against following grammar: 
+
+```html
         E -> E binary_operator T  
         E -> T
         T -> unary_operator T            
@@ -36,9 +38,12 @@ A light weight, customizable expression evaluator.
         F -> F , E
         F -> E
 ```
- ## Quick demo
  
- ```java
+ 
+<a id="quick-demo"></a>
+## Quick Demo: 
+ 
+```java
  assertEquals(0d, Expression.parse("-1+1").eval());
  assertEquals(2d, Expression.parse("4/2").eval());
  assertEquals(true, Expression.parse("3.9999999<=4 && 5.0000000001>5").eval());
@@ -92,7 +97,8 @@ assertEquals(true,Expression.parse("list contains 1").eval());
 assertEquals(2d,Expression.parse("1+if(list contains true,1,2)").eval());
 ```
 
-## Predefined operators
+<a id="predefined-native-operators"></a>
+## Predefined Native Operators
 
 <table>
 <tr><th>Operator</th><th>Description</th><th>Precedence</th></tr>
@@ -120,9 +126,10 @@ assertEquals(2d,Expression.parse("1+if(list contains true,1,2)").eval());
 <tr><td>||</td><td>Logical OR</td><td>42</td></tr>
 </table>
 
+<a id="custom-operators-and-functions"></a>
 ## Custom operators and functions
 
-Custom operators and functions can registered to any defined context.The identifier or name of custom operator and function should be a valid java identifier, else an exception is thrown during registration.
+Custom operators and functions can be registered to any defined context. The identifier or name of custom operator and function should be a valid java identifier, else an exception is thrown during registration.
 
 ```java
 Context.getDefault().registerUnaryOperator(new UnaryOperator("decBy2", UnaryOperator.NEGATE.getPrecedence()) {
@@ -161,10 +168,11 @@ assertEquals(true, Expression.parse("decBy2 asList(1,2,3) contains 0").eval());
  
 ```
 
+<a id="using-context"></a>
 ## Using Context
-> * Context is an environment in which you can register your custom operators,functions or vars.
-> * Operators or functions registered in one context is not visible in another context.
-> * Every context has all predefined operators mentioned above.
+* Context is an environment to which you can register your custom operators, functions and variables.
+* Operators or functions registered to one context are not visible to another context.
+* All `predefined native operators` are available to every context by default
 
 ```java
    Context.getDefault().registerFunction(new Function("sin") {
@@ -210,15 +218,3 @@ assertEquals(true, Expression.parse("decBy2 asList(1,2,3) contains 0").eval());
    Context.removeContext("scope1");
    assertNull(Context.get("scope1"));
 ```
-
-
-
-
-
-
-
-
-
-
-
-
