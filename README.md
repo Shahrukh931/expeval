@@ -1,11 +1,12 @@
 ExpEval
 =======
-A light weight, customizable expression evaluator.
+A light weight(<50Kb), customisable expression evaluator with no external dependencies.
 
 # Overview
 ---
 
 - [Key features](#key-features)
+- [Supported data types](#data-types)
 - [Quick demo](#quick-demo)
 - [Predefined native operators](#predefined-native-operators)
 - [Custom operators and functions](#custom-operators-and-functions)
@@ -39,15 +40,24 @@ A light weight, customizable expression evaluator.
         F -> E
 ```
  
- 
+<a id="data-types"></a>
+## Supported Data types
+
+- Number (`double` and `long`)
+- Boolean (`true` and `false`)
+- String (Should be inside double quotes)
+- Null (`null`)
+
+
 <a id="quick-demo"></a>
 ## Quick Demo: 
  
 ```java
- assertEquals(0d, Expression.parse("-1+1").eval());
- assertEquals(2d, Expression.parse("4/2").eval());
- assertEquals(true, Expression.parse("3.9999999<=4 && 5.0000000001>5").eval());
- asssertEquals(true, Expression.parse("true&&!false").eval());
+assertEquals(true, Expression.parse("\"a\" == \"a\"").eval());
+assertEquals(0d, Expression.parse("-1+1").eval());
+assertEquals(2d, Expression.parse("4/2").eval());
+assertEquals(true, Expression.parse("3.9999999<=4 && 5.0000000001>5").eval());
+asssertEquals(true, Expression.parse("true&&!false").eval());
  
 Var x = new Var("x");
 x.setValue(10);
