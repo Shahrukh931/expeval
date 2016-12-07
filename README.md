@@ -2,6 +2,28 @@ ExpEval
 =======
 A light weight(<50Kb), customisable expression evaluator with no external dependencies.
 
+Integration
+---
+
+Maven dependency
+
+```xml
+
+<dependency>
+  <groupId>com.shahrukh</groupId>
+  <artifactId>expeval</artifactId>
+  <version>1.0.0</version>
+  <type>pom</type>
+</dependency>
+
+```
+Gradle dependency
+
+```groovy
+compile 'com.shahrukh:expeval:1.0.0'
+```
+
+
 # Overview
 ---
 
