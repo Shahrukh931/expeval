@@ -13,7 +13,6 @@ Maven dependency
   <groupId>com.shahrukh</groupId>
   <artifactId>expeval</artifactId>
   <version>1.0.0</version>
-  <type>pom</type>
 </dependency>
 
 ```
