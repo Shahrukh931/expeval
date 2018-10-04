@@ -12,7 +12,7 @@ Maven dependency
 <dependency>
   <groupId>com.shahrukh</groupId>
   <artifactId>expeval</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
 </dependency>
 
 ```
