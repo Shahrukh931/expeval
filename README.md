@@ -19,7 +19,7 @@ Maven dependency
 Gradle dependency
 
 ```groovy
-compile 'com.shahrukh:expeval:1.0.0'
+compile 'com.shahrukh:expeval:1.0.1'
 ```
 
 
