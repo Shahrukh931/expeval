@@ -76,8 +76,8 @@ compile 'com.shahrukh:expeval:1.0.0'
  
 ```java
 assertEquals(true, Expression.parse("\"a\" == \"a\"").eval());
-assertEquals(0d, Expression.parse("-1+1").eval());
-assertEquals(2d, Expression.parse("4/2").eval());
+assertEquals(0, Expression.parse("-1+1").eval());
+assertEquals(2, Expression.parse("4/2").eval());
 assertEquals(true, Expression.parse("3.9999999<=4 && 5.0000000001>5").eval());
 asssertEquals(true, Expression.parse("true&&!false").eval());
  
@@ -119,14 +119,14 @@ Context.getDefault().registerBinaryOperator(new BinaryOperator("contains", Binar
 });
 
 Expression expression = Expression.parse("x+1");
-assertEquals(10d,expression.eval());
+assertEquals(10,expression.eval());
 
 Context.getDefault().getVar("x").setValue(100);
-assertEquals(101d,expression.eval());
+assertEquals(101,expression.eval());
 
-assertEquals(3l,Expression.parse("if(2>1,3,4)").eval());
+assertEquals(3,Expression.parse("if(2>1,3,4)").eval());
 assertEquals(true,Expression.parse("list contains 1").eval());
-assertEquals(2d,Expression.parse("1+if(list contains true,1,2)").eval());
+assertEquals(2,Expression.parse("1+if(list contains true,1,2)").eval());
 ```
 
 <a id="predefined-native-operators"></a>

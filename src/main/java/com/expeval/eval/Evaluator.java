@@ -19,9 +19,13 @@ public abstract class Evaluator {
     public Number toNumber(Token token) {
         String lexeme = token.getLexeme();
         try {
-            return Long.parseLong(lexeme);
-        } catch (NumberFormatException e) {
-            return Double.parseDouble(lexeme);
+            return Integer.parseInt(lexeme);
+        }catch (NumberFormatException e) {
+            try {
+                return Long.parseLong(lexeme);
+            } catch (NumberFormatException e1) {
+                return Double.parseDouble(lexeme);
+            }
         }
     }
 

@@ -22,28 +22,28 @@ public class ExpressionTest {
 
     @Test
     public void testSimpleNativeOperators() {
-        assertEquals(-1d, Expression.parse("  -  1 ").eval());
+        assertEquals(-1, Expression.parse("  -  1 ").eval());
         assertEquals(-.1d, Expression.parse(" - .1").eval());
-        assertEquals(1d, Expression.parse("-+-+1").eval());
-        assertEquals(2d, Expression.parse("1+-+-+1").eval());
-        assertEquals(1d, Expression.parse("  +1  ").eval());
-        assertEquals(0d, Expression.parse(" -1 + 1 ").eval());
+        assertEquals(1, Expression.parse("-+-+1").eval());
+        assertEquals(2, Expression.parse("1+-+-+1").eval());
+        assertEquals(1, Expression.parse("  +1  ").eval());
+        assertEquals(0, Expression.parse(" -1 + 1 ").eval());
         assertEquals(3.1666d, Expression.parse(" 2.0333 + 1.1333 ").eval());
-        assertEquals(2d, Expression.parse("+1+1").eval());
-        assertEquals(0d, Expression.parse("1+-1").eval());
-        assertEquals(2d, Expression.parse("1--1").eval());
-        assertEquals(1d, Expression.parse("2-1").eval());
-        assertEquals(-6l, Expression.parse("~5").eval());
-        assertEquals(-16d, Expression.parse("-10+~5").eval());
+        assertEquals(2, Expression.parse("+1+1").eval());
+        assertEquals(0, Expression.parse("1+-1").eval());
+        assertEquals(2, Expression.parse("1--1").eval());
+        assertEquals(1, Expression.parse("2-1").eval());
+        assertEquals(-6, Expression.parse("~5").eval());
+        assertEquals(-16, Expression.parse("-10+~5").eval());
         assertEquals(false, Expression.parse("!true").eval());
-        assertEquals(2d, Expression.parse("4/2").eval());
-        assertEquals(0.5d, Expression.parse("2/4").eval());
+        assertEquals(2, Expression.parse("4/2").eval());
+        assertEquals(0, Expression.parse("2/4").eval());
         assertEquals(true, Expression.parse("false || !false").eval());
         assertEquals(false, Expression.parse("true && !true").eval());
-        assertEquals(10l, Expression.parse("3+5^2").eval());
-        assertEquals(7l, Expression.parse("3|5").eval());
+        assertEquals(10, Expression.parse("3+5^2").eval());
+        assertEquals(7, Expression.parse("3|5").eval());
         assertEquals("abc12", Expression.parse("\"abc\"+1+2").eval());
-        assertEquals("3.0abc", Expression.parse("1+2+\"abc\"").eval());
+        assertEquals("3abc", Expression.parse("1+2+\"abc\"").eval());
         assertEquals(true, Expression.parse("\"ab\"==\"ab\"").eval());
         assertEquals(false, Expression.parse("\"ab\"==\"Ab\"").eval());
         assertEquals(false, Expression.parse("1==\"1\"").eval());
@@ -53,13 +53,13 @@ public class ExpressionTest {
         assertEquals("1null", Expression.parse("\"1\"+null").eval());
         assertEquals("null1", Expression.parse("null+\"1\"").eval());
         assertEquals("12", Expression.parse("\"1\"+\"2\"").eval());
-        assertEquals(-1d, Expression.parse("1*-1").eval());
+        assertEquals(-1, Expression.parse("1*-1").eval());
 
     }
 
     @Test
     public void testWithParanthesis() {
-        assertEquals(3d, Expression.parse(" (((1))) + ( ( ( 2 ) ) )  ").eval());
+        assertEquals(3, Expression.parse(" (((1))) + ( ( ( 2 ) ) )  ").eval());
         assertEquals(-2.5d, Expression.parse("( (1   +    2) * -3.0000 / 2 + - (-1.0000 + -1 ) )").eval());
         assertEquals(-0.53d, Expression.parse(" (.1 + .2)*(.3 - .4) + - .5 ").eval());
     }
@@ -108,12 +108,12 @@ public class ExpressionTest {
         Context.getDefault().registerFunction(new Function("fact") {
             @Override
             public Object onEvaluation(List<Object> arguments) {
-                Long value = (Long) arguments.get(0);
+                Integer value = (Integer) arguments.get(0);
                 if (value == 0) {
-                    return Long.valueOf("1");
+                    return Integer.valueOf("1");
                 }
                 arguments.set(0, value - 1);
-                return value * (Long) Context.getDefault().getFunction("fact").onEvaluation(arguments);
+                return value * (Integer) Context.getDefault().getFunction("fact").onEvaluation(arguments);
             }
         });
 
@@ -155,14 +155,14 @@ public class ExpressionTest {
         assertEquals(10, Expression.parse("x").eval());
 
         Context.getDefault().getVar("x").setValue(100);
-        assertEquals(-101d, Expression.parse("-x+-1").eval());
+        assertEquals(-101, Expression.parse("-x+-1").eval());
 
 
-        assertEquals(101d, Expression.parse("if(get(\"discount\"),x+1,x-2)").eval());
+        assertEquals(101, Expression.parse("if(get(\"discount\"),x+1,x-2)").eval());
         assertEquals(true, Expression.parse("list contains 1 && asList(1,2,3,true) contains true").eval());
-        assertEquals(3d, Expression.parse(" if(decBy2 asList(2,3,4,5,6)   contains   0 , get(\"version\") + 2,true  ) ").eval());
+        assertEquals(3, Expression.parse(" if(decBy2 asList(2,3,4,5,6)   contains   0 , get(\"version\") + 2,true  ) ").eval());
         assertEquals(true, Expression.parse("get(\"screenName\") == \"MainScreen\" && get(\"screenTitle\") == \"Title1\"").eval());
-        assertEquals(120l,Expression.parse("fact(5)").eval());
+        assertEquals(120,Expression.parse("fact(5)").eval());
 
     }
 

@@ -1,5 +1,6 @@
 package com.expeval;
 
+import com.expeval.tokenizer.InvalidDataTypeException;
 import com.expeval.tokens.Token;
 
 import java.util.Iterator;
@@ -45,5 +46,11 @@ public class Utils {
         }
         String result = sb.toString();
         return result.length() > 0 ? result.substring(0, result.length() - 1) : result;
+    }
+
+    public static void throwInvalidDataTypeExceptionForBinaryOperator(String op, Object leftValue, Object rightValue) throws InvalidDataTypeException{
+        String leftValueClass = leftValue == null ? "null": leftValue.getClass().getName();
+        String rightValueClass = rightValue == null? "null": rightValue.getClass().getName();
+        throw new InvalidDataTypeException("Operator '"+op+"' cannot be applied to '"+leftValueClass+"' and '"+rightValueClass+"'");
     }
 }
